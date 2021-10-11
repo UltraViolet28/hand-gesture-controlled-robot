@@ -6,7 +6,7 @@ The project has two parts:
 1. Code for detecting hand gestures (using openCV library).
 2. Integrating hand gesture detection to publishing motion commands to the robot.
 
-# dependencies/pakages
+# dependencies/packages
 - Ubuntu Operating system
 - OpenCV library for image processing
 - ROS-noetic (Robot operating system)
