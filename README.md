@@ -15,3 +15,8 @@ The project has two parts:
     - ros control (https://wiki.ros.org/ros_control)
     - turtlebot3 (https://emanual.robotis.com/docs/en/platform/turtlebot3/simulation/#gazebo-simulation )
 
+# results
+
+https://user-images.githubusercontent.com/88196192/136833775-a2c4f5da-c484-49b4-b289-64e33e480ac2.mp4
+
+https://user-images.githubusercontent.com/88196192/136834141-bf9fc7ff-a33e-4d22-8e98-2642f9faa8d1.mp4
