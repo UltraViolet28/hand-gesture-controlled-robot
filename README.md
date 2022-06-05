@@ -24,10 +24,10 @@ For this project we used ROS noetic, turtlesim and turtlebot3.
 Finally we publish angular and linear velocity as per motion we want on specific Hand_Gesture.
 
 ### HOW TO RUN THE CODE
-- git clone https://github.com/ash-S26/Hand_Gesture_Controlled_Robot.git
+- git clone https://github.com/UltraViolet28/hand-gesture-controlled-robot.git
 - export TURTLEBOT3_MODEL=burger {as per requirement burger/waffle/empty}
 - roslaunch turtlebot3_gazebo turtlebot3_empty_world.launch
-- python3 Hand_Gestur_Controlled_Robot.py {Finally run the code by navigating to directory where you cloned and then to where is code Hand_Gestur_Controlled_Robot.py}
+- python3 turtle_hand.py {Finally run the code by navigating to directory where you cloned and then to where is code Hand_Gestur_Controlled_Robot.py}
 - Or you can run code from any code editor.
 
 ## RESULTS
