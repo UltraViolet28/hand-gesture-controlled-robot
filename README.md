@@ -33,12 +33,11 @@ Finally we publish angular and linear velocity as per motion we want on specific
 ## RESULTS
 - HAND_GESTURE_DETECTION :-
 
-hand_detection.gif
+![image](https://user-images.githubusercontent.com/88196192/172039668-3b382d9f-9372-4dcc-827a-d7e48cfa847d.png)
 
 - CONTROLLING ROBOT IN EMPTY WORLD WITH HAND :-
 
-hand_gesture_control_robot_empty_world.gif
-
+![image](https://user-images.githubusercontent.com/88196192/172039684-40f2b8c3-c855-4d8a-b355-3fb692707d62.png)
 - CONTROLLING ROBOT IN WAFFLE WORLD WITH HAND :-
 
-hand_gesture_control_robot_waffle_world.gif
+![image](https://user-images.githubusercontent.com/88196192/172039692-9ecfbe4e-21b0-47f7-ba88-c482eb56874d.png)
