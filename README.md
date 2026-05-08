@@ -1,42 +1,51 @@
-# HAND-GESTURE-CONTROLLED-ROBOT
-This project is about controlling robot motion with hand gestures which have commands like rotate, move forward and backward, accelarate and stop.The project have two parts arrow_right
+# Hand Gesture Controlled Robot
 
-- Detection of Hand_Gesture using opencv library.
-- Integrating Hand_Gesture to publish commands to robot.
-## DEPENDENCIES/PACKAGES
-- Image processing library opencv
-- ROS(Robot operating system , version-noetic)
-- Gazebo (if not installed along with ROS)
-## pakages :-
-- ros_controll {To be cloned in catkin_ws}
-- Join_state_controller (if not included in ros_controll) {To be cloned in src folder of catkin_ws}
-- Turtlebot3 pakage - (https://emanual.robotis.com/docs/en/platform/turtlebot3/simulation/#gazebo-simulation) {To be cloned in src folder of catkin_ws}
-## ALGORITHM
-### ALGORITHM FOR DETECTION OF HAND_GESTURE
-Seperate out the skin color from the input frame using HSV or other color format with upper and lower bound for skin color as per range. Removal of noise from image via Morphological Transformation, and applying filters to smooothen the image.Finding the contour of the mask and finding its convex-hull.
-Using the various properties for seperation various Hand_Gestures(In this project we will use Indian-sign-language as Hand_Gesture- 1,2,3..) like- convexity defects along with contour properties like solidity, extent and aspect ratio of respective gesture.
-### ALGORITHM FOR ROBOT
-For this project we used ROS noetic, turtlesim and turtlebot3.
+Real-time Indian Sign Language (ISL) digit gesture recognition that maps hand poses to motion commands on a TurtleBot3, using only a standard webcam.
 
--We used gazebo for simulation.
--We used ros-topic /cmd_vel for publishing velocity message to robot in gazebo simulation.
-### INTEGRATION
-Finally we publish angular and linear velocity as per motion we want on specific Hand_Gesture.
+## Overview
 
-### HOW TO RUN THE CODE
-- git clone https://github.com/UltraViolet28/hand-gesture-controlled-robot.git
-- export TURTLEBOT3_MODEL=burger {as per requirement burger/waffle/empty}
-- roslaunch turtlebot3_gazebo turtlebot3_empty_world.launch
-- python3 turtle_hand.py {Finally run the code by navigating to directory where you cloned and then to where is code Hand_Gestur_Controlled_Robot.py}
-- Or you can run code from any code editor.
+This project implements a vision-based human-robot interaction system. A webcam detects hand gestures corresponding to ISL digit signs (0–9) using classical image processing — no pretrained neural network. Detected gestures are mapped to velocity commands (forward, backward, rotate left/right, stop, accelerate) published over ROS to a TurtleBot3. The system was tested in Gazebo simulation and on a real TurtleBot3. This was the first robotics project completed at IvLabs.
 
-## RESULTS
-- HAND_GESTURE_DETECTION :-
+## Methods / Approach
 
-![hand_detection](https://user-images.githubusercontent.com/88196192/172040090-ca2c873b-88df-42e1-96f7-099b08f01f4a.gif)
+- **Color segmentation:** YCrCb color space with fixed skin-tone bounds; HSV [0,58,30]–[33,255,255] for skin region extraction
+- **Preprocessing:** morphological dilation (4 iterations) + erosion (2 iterations) + closing + median blur to isolate hand region
+- **Feature extraction:** contour finding, convex hull, convexity defects, cosine rule for inter-finger angles
+- **Classification:** rule-based on convexity defect count, solidity, extent, and aspect ratio — no learned model
+- **Robot control:** ROS Noetic, Twist messages published to `/cmd_vel` at 10 Hz
+- **Platform:** TurtleBot3 (Gazebo simulation + real hardware)
+- **Libraries:** OpenCV (cv2), NumPy, rospy
 
-- CONTROLLING ROBOT IN EMPTY WORLD WITH HAND :-
-![hand_gesture_control_robot_empty_world](https://user-images.githubusercontent.com/88196192/172040097-a812823e-a693-45b1-9818-d49a9676caa6.gif)
+## Results
 
-- CONTROLLING ROBOT IN WAFFLE WORLD WITH HAND :-
-![hand_gesture_control_robot_waffle_world](https://user-images.githubusercontent.com/88196192/172040101-4b00a377-1288-48a3-a64f-570162e61b12.gif)
+Demonstration videos are in `results/`:
+- `Hand_Gesture_detection.mp4` — gesture detection pipeline running on webcam feed
+- `Hand_Gesture_controlled_bot.mp4` — robot control in Gazebo waffle world
+- `Hand_Gesture_controlled_bot_short.mp4` — shortened demo
+- `Hand_gesture.mp4` — gesture recognition footage
+
+The system reliably distinguishes gestures 0–5 under controlled lighting. Performance degrades under varying illumination due to fixed HSV thresholds.
+
+## How to Run
+
+Dependencies:
+- ROS Noetic
+- TurtleBot3 packages: https://emanual.robotis.com/docs/en/platform/turtlebot3/simulation/#gazebo-simulation
+- `ros_control`, `joint_state_controller` (clone into catkin workspace src/)
+- Python: `pip install opencv-python numpy`
+
+```bash
+export TURTLEBOT3_MODEL=waffle   # or burger / empty
+roslaunch turtlebot3_gazebo turtlebot3_empty_world.launch
+# In a separate terminal, from the code/ directory:
+python3 turtle_hand.py
+```
+
+For gesture detection only (no ROS):
+```bash
+python3 code/sign_lang_detection_final.py
+```
+
+## Context
+
+Developed at IvLabs, VNIT Nagpur, June 2022. First IvLabs robotics project.
